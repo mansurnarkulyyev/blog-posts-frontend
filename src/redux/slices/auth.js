@@ -8,7 +8,6 @@ export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params) => {
 
 export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params) => {
     const { data } = await instance.post('/auth/register', params);
-    console.log(data);
     return data;
 })
 

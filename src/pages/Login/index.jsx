@@ -18,15 +18,14 @@ export const Login = () => {
   const { register, handleSubmit, formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: 'test@mail.com',
-      password: '12345',
+      email: '',
+      password: '',
     },
     // mode: 'onChange',
   });
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchAuth(values));
-    console.log(data);
     if (!data.payload) {
       return alert('Failed to login!');
     };
@@ -63,7 +62,7 @@ export const Login = () => {
           {...register('password', { required: 'Enter your password' })}
           fullWidth />
         <Button
-          disabled={!isValid}
+          // disabled={!isValid}
           type="submit"
           size="large" variant="contained" fullWidth>
           Войти
@@ -72,3 +71,4 @@ export const Login = () => {
     </Paper>
   );
 };
+

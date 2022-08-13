@@ -19,16 +19,15 @@ export const Registration = () => {
   const { register, handleSubmit, formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      fullName: 'John Doe',
-      email: 'test2@mail.com',
-      password: '1234 ',
+      fullName: '',
+      email: '',
+      password: '',
     },
-    // mode: 'onChange',
+    mode: 'onChange',
   });
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchRegister(values));
-    console.log(data);
     if (!data.payload) {
       return alert('Failed to register!');
     };

@@ -11,6 +11,9 @@ export const fetchTags = createAsyncThunk('posts/fetchTags', async () => {
     return data;
 }); 
 
+export const fetchRemovePost = createAsyncThunk('/posts/fetchRemovePost', async (id) =>
+    instance.delete(`posts/${id}`),
+);
 
 // export const fetchComments = createAsyncThunk('posts/fetchComments', async () => {
 //     const { data } = await instance.get('/comments');
@@ -77,6 +80,10 @@ const postsSlice = createSlice({
         //     state.comments.items = [];
         //     state.comments.status = 'error';
         // },
+        //tags
+        [fetchRemovePost.pending]: (state, action) => {
+            state.posts.items = state.posts.items.filter(obj=> obj._id === action.meta.arg)
+        },
     },
 });
 

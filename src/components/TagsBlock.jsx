@@ -10,7 +10,6 @@ import Skeleton from "@mui/material/Skeleton";
 
 import { SideBlock } from "./SideBlock";
 import { Link } from "react-router-dom";
-
 export const TagsBlock = ({ items, isLoading = true }) => {
   return (
     <SideBlock title="Тэги">

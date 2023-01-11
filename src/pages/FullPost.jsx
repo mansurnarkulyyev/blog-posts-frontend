@@ -53,7 +53,7 @@ export const FullPost = () => {
               fullName: "John Doe",
               avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
             },
-            text: "Это тестовый комментарий 555555",
+            text: "This is a test comment. 555555",
           },
           {
             user: {

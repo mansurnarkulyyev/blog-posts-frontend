@@ -11,6 +11,8 @@ import { selectIsAuth } from '../../redux/slices/auth';
 import instance from '../../shared/api';
 import styles from './AddPost.module.scss';
 
+const BASE_URL = "https://blog-posts-backend-production.up.railway.app";
+
 export const AddPost = () => {
   const { id } = useParams();
 
@@ -118,7 +120,7 @@ export const AddPost = () => {
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
             Delete
           </Button>
-          <img className={styles.image} src={`http://localhost:8888${imageUrl}`} alt="Uploaded" />
+          <img className={styles.image} src={`${BASE_URL}${imageUrl}`} alt="Uploaded" />
         </>
       )}
       <br />

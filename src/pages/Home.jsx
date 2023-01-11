@@ -9,6 +9,8 @@ import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { fetchPosts, fetchTags } from '../redux/slices/posts';
 
+const BASE_URL = "https://blog-posts-backend-production.up.railway.app";
+
 export const Home = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.data);
@@ -42,7 +44,7 @@ export const Home = () => {
                 id={obj._id}
                 key={index}
                 title={obj.title}
-                imageUrl={obj.imageUrl ? `http://localhost:8888${obj.imageUrl}` : ''}
+                imageUrl={obj.imageUrl ? `${BASE_URL}${obj.imageUrl}` : ''}
                 user={obj.user}
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewsCount}

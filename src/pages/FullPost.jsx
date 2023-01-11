@@ -7,6 +7,8 @@ import { AddComment } from "../components/AddComment/AddComment";
 import { CommentsBlock } from "../components/CommentsBlock";
 import instance from "../shared/api.js";
 
+const BASE_URL = "https://blog-posts-backend-production.up.railway.app";
+
 export const FullPost = () => {
   const [data, setData] = useState();
   // console.log(data)
@@ -34,7 +36,7 @@ export const FullPost = () => {
       <Post
         id={data._id}
         title={data.title}
-        imageUrl={data.imageUrl ? `http://localhost:8888${data.imageUrl}` : ''}
+        imageUrl={data.imageUrl ? `${BASE_URL}${data.imageUrl}` : ''}
         user={data.user}
         createdAt={data.createdAt}
         viewsCount={data.viewsCount}

@@ -156,3 +156,19 @@ $blue: #4361ee;
   opacity: 0;
   transition: all 0.15s ease-in-out;
 }
+
+.bottomWrap{
+    display: flex;
+    justify-content: space-between;
+  }
+
+.postMore{
+  padding: 10px 16px;
+    min-width: 100px;
+    border: none;
+    background: #4361ee;
+    color: #fff;
+    border-radius: 7px;
+    cursor: pointer;
+}
+

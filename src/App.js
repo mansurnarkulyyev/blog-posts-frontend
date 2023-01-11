@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
-import { Header } from "./components";
+import { Header } from "./components/Header/Header";
 import { Home, FullPost, Registration, AddPost, Login } from "./pages";
 import { fetchAuthMe } from "./redux/slices/auth";
 
@@ -27,6 +27,7 @@ function App() {
           <Route path="/add-post" element={ <AddPost /> } />
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Registration /> } />
+           <Route path="*" element={<p>Path not resolved</p>} />
         </Routes>
       </Container>
     </>

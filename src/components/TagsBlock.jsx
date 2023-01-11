@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -8,13 +9,13 @@ import TagIcon from "@mui/icons-material/Tag";
 import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 
-import { SideBlock } from "./SideBlock";
-import { Link } from "react-router-dom";
+import { SideBlock } from "./SideBlock/SideBlock";
+
 export const TagsBlock = ({ items, isLoading = true }) => {
   return (
-    <SideBlock title="Тэги">
-      <List>
-        {(isLoading ? [...Array(5)] : items).map((name, i) => (
+    <SideBlock title="Tags">
+      {(isLoading ? [...Array(5)] : items).map((name, i) => (
+        <List key={i}>
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to={`/tags/${name}`}
@@ -32,8 +33,8 @@ export const TagsBlock = ({ items, isLoading = true }) => {
               </ListItemButton>
             </ListItem>
           </Link>
-        ))}
-      </List>
+        </List>
+      ))}
     </SideBlock>
   );
 };

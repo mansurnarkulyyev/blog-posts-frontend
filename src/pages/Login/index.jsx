@@ -1,14 +1,14 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-import styles from "./Login.module.scss";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
-import { Navigate } from "react-router-dom";
+import styles from "./Login.module.scss";
 
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -21,7 +21,7 @@ export const Login = () => {
       email: '',
       password: '',
     },
-    // mode: 'onChange',
+    mode: 'onChange',
   });
 
   const onSubmit = async (values) => {
@@ -33,7 +33,6 @@ export const Login = () => {
     if ('token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token);
     }
-
   };
 
   if (isAuth) {
@@ -43,7 +42,7 @@ export const Login = () => {
   return (
     <Paper classes={{ root: styles.root }}>
       <Typography classes={{ root: styles.title }} variant="h5">
-        Вход в аккаунт
+        Sign In
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
@@ -56,7 +55,7 @@ export const Login = () => {
           fullWidth
         />
         <TextField className={styles.field}
-          label="Пароль"
+          label="Password"
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
           {...register('password', { required: 'Enter your password' })}
@@ -65,7 +64,7 @@ export const Login = () => {
           // disabled={!isValid}
           type="submit"
           size="large" variant="contained" fullWidth>
-          Войти
+          Continue
         </Button>
       </form>
     </Paper>

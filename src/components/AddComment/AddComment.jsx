@@ -1,12 +1,12 @@
 import React from "react";
 
-import styles from "./AddComment.module.scss";
-
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
-export const Index = () => {
+import styles from "./add-comment.module.scss";
+
+export const AddComment = () => {
   return (
     <>
       <div className={styles.root}>
@@ -16,13 +16,13 @@ export const Index = () => {
         />
         <div className={styles.form}>
           <TextField
-            label="Написать комментарий"
+            label="Create comments"
             variant="outlined"
             maxRows={10}
             multiline
             fullWidth
           />
-          <Button variant="contained">Отправить</Button>
+          <Button variant="contained">Send</Button>
         </div>
       </div>
     </>

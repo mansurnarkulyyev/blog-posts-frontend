@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './UserInfo.module.scss';
+import styles from './user-info.module.scss';
 
 export const UserInfo = ({ avatarUrl, fullName, additionalText }) => {
   return (

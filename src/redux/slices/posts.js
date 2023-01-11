@@ -3,23 +3,21 @@ import instance from "../../shared/api";
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     const { data } = await instance.get('/posts');
+    // console.log(data);
     return data;
 });
 
 export const fetchTags = createAsyncThunk('posts/fetchTags', async () => {
     const { data } = await instance.get('/tags');
+    // console.log(data);
     return data;
 }); 
 
-export const fetchRemovePost = createAsyncThunk('/posts/fetchRemovePost', async (id) =>
-    instance.delete(`posts/${id}`),
+export const fetchRemovePost = createAsyncThunk('posts/fetchRemovePost', async (id) =>
+    instance.delete(`/posts/${id}`),
 );
 
-// export const fetchComments = createAsyncThunk('posts/fetchComments', async () => {
-//     const { data } = await instance.get('/comments');
-//     return data;
-// }); 
- 
+
 
 const initialState = {
     posts: {
@@ -30,17 +28,13 @@ const initialState = {
         items: [],
         status: 'loading',
     },
-    // comments: {
-    //     items: [],
-    //     status: 'loading',
-    // },
-
+    
 };
 
 const postsSlice = createSlice({
     name: 'posts',
     initialState,
-    reducer: {},
+    reducers: {},
     extraReducers: {
         [fetchPosts.pending]: (state) => {
             state.posts.items = [];
@@ -48,6 +42,7 @@ const postsSlice = createSlice({
         },
         [fetchPosts.fulfilled]: (state, action) => {
             state.posts.items = action.payload;
+            // console.log(action.payload);
             state.posts.status = 'loaded';
         },
         [fetchPosts.rejected]: (state) => {
@@ -67,20 +62,8 @@ const postsSlice = createSlice({
             state.tags.items = [];
             state.tags.status = 'error';
         },
-        //comments
-        // [fetchComments.pending]: (state) => {
-        //     state.comments.items = [];
-        //     state.comments.status = 'loading';
-        // },
-        // [fetchComments.fulfilled]: (state, action) => {
-        //     state.comments.items = action.payload;
-        //     state.comments.status = 'loaded';
-        // },
-        // [fetchComments.rejected]: (state) => {
-        //     state.comments.items = [];
-        //     state.comments.status = 'error';
-        // },
-        //tags
+       
+  
         [fetchRemovePost.pending]: (state, action) => {
             state.posts.items = state.posts.items.filter(obj=> obj._id === action.meta.arg)
         },

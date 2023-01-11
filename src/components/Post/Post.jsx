@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Clear';
@@ -6,11 +8,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 
-import styles from './Post.module.scss';
-import { UserInfo } from '../UserInfo';
+import styles from './post.module.scss';
+import { UserInfo } from '../UserInfo/UserInfo';
 import { PostSkeleton } from './Skeleton';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+
 import { fetchRemovePost } from '../../redux/slices/posts';
 
 export const Post = ({
@@ -29,6 +30,10 @@ export const Post = ({
 }) => {
   const dispatch = useDispatch()
 
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
   if (isLoading) {
     return <PostSkeleton />;
   }
@@ -38,6 +43,10 @@ export const Post = ({
       dispatch(fetchRemovePost(id));
     }
   };
+
+  const prevPageLocation = location.state?.prevPageLocation || "/";
+
+  const goBack = () => navigate(prevPageLocation);//откуда пришел тужда и зашел 
 
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
@@ -74,16 +83,21 @@ export const Post = ({
             ))}
           </ul>
           {children && <div className={styles.content}>{children}</div>}
-          <ul className={styles.postDetails}>
-            <li>
-              <EyeIcon />
-              <span>{viewsCount}</span>
-            </li>
-            <li>
-              <CommentIcon />
-              <span>{commentsCount}</span>
-            </li>
-          </ul>
+          <div className={styles.bottomWrap} >
+            <ul className={styles.postDetails}>
+              <li>
+                <EyeIcon />
+                <span>{viewsCount}</span>
+              </li>
+              <li>
+                <CommentIcon />
+                <span>{commentsCount}</span>
+              </li>
+            </ul>
+            {isFullPost ? <button className={styles.postMore} onClick={goBack}>Go back</button> : <Link style={{ textDecoration: "none", color: "#fff" }} to={`/posts/${id}`}><button className={styles.postMore}>More...</button></Link>}
+
+          </div>
+
         </div>
       </div>
     </div>

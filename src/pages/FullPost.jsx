@@ -1,17 +1,17 @@
-import React from "react";
-
-import { Post } from "../components/Post";
-import { Index } from "../components/AddComment";
-import { CommentsBlock } from "../components/CommentsBlock";
-import { useParams } from "react-router-dom";
-import instance from "../shared/api.js";
+import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { useParams } from "react-router-dom";
+
+import { Post } from "../components/Post/Post";
+import { AddComment } from "../components/AddComment/AddComment";
+import { CommentsBlock } from "../components/CommentsBlock";
+import instance from "../shared/api.js";
 
 export const FullPost = () => {
-  const [data, setData] = React.useState();
-  const [isLoading, setLoading] = React.useState(true);
+  const [data, setData] = useState();
+  // console.log(data)
+  const [isLoading, setLoading] = useState(true);
 
-  console.log(data);
   const { id } = useParams();
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ export const FullPost = () => {
       setLoading(false);
     }).catch((err) => {
       console.warn(err);
-      alert('Ошибка при получении статьи');
+      alert('Error getting article!');
     });
   }, []);
 
@@ -42,22 +42,22 @@ export const FullPost = () => {
         tags={data.tags}
         isFullPost
       >
-        <p>
+        <div>
           <ReactMarkdown children={data.text} />
-        </p>
+        </div>
       </Post>
       <CommentsBlock
         items={[
           {
             user: {
-              fullName: "Вася Пупкин",
+              fullName: "John Doe",
               avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
             },
             text: "Это тестовый комментарий 555555",
           },
           {
             user: {
-              fullName: "Иван Иванов",
+              fullName: "John Doe",
               avatarUrl: "https://mui.com/static/images/avatar/2.jpg",
             },
             text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
@@ -65,7 +65,7 @@ export const FullPost = () => {
         ]}
         isLoading={false}
       >
-        <Index />
+        <AddComment />
       </CommentsBlock>
     </>
   );

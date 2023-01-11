@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
 
-import { Post } from '../components/Post';
+import { Post } from '../components/Post/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, fetchTags } from '../redux/slices/posts';
 
 export const Home = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.data);
   const { posts, tags } = useSelector((state) => state.posts);
+  // console.log(posts);
   const isPostsLoading = posts.status === 'loading';
   const isTagsLoading = tags.status === 'loading';
   // const isCommentsLoading = comments.status === 'loading';
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchTags());
     // dispatch(fetchComments());
@@ -35,10 +36,11 @@ export const Home = () => {
         <Grid xs={8} item>
           {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
             isPostsLoading ? (
-              < Post key={index} isLoading={true} />
+              <Post key={index} isLoading={true} />
             ) : (
               <Post
                 id={obj._id}
+                key={index}
                 title={obj.title}
                 imageUrl={obj.imageUrl ? `http://localhost:8888${obj.imageUrl}` : ''}
                 user={obj.user}

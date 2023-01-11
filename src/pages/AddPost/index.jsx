@@ -1,15 +1,15 @@
 import React from 'react';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SimpleMDE from 'react-simplemde-editor';
 
 import 'easymde/dist/easymde.min.css';
-import styles from './AddPost.module.scss';
 import { selectIsAuth } from '../../redux/slices/auth';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import instance from '../../shared/api';
+import styles from './AddPost.module.scss';
 
 export const AddPost = () => {
   const { id } = useParams();
@@ -79,7 +79,7 @@ export const AddPost = () => {
         setTitle(data.title);
         setText(data.text);
         setImageUrl(data.imageUrl);
-        setTags(data.tags);
+        setTags(data.tags.join(','));
       }).catch((err) => {
         console.warn(err);
         alert('Error getting article!');
@@ -92,7 +92,7 @@ export const AddPost = () => {
       spellChecker: false,
       maxHeight: '400px',
       autofocus: true,
-      placeholder: 'Введите текст...',
+      placeholder: 'Type text...',
       status: false,
       autosave: {
         enabled: true,
@@ -110,13 +110,13 @@ export const AddPost = () => {
   return (
     <Paper style={{ padding: 30 }}>
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-        Загрузить превью
+        Upload image
       </Button>
       <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (
         <>
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-            Удалить
+            Delete
           </Button>
           <img className={styles.image} src={`http://localhost:8888${imageUrl}`} alt="Uploaded" />
         </>
@@ -126,24 +126,34 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
-        placeholder="Заголовок статьи..."
+        placeholder="Title..."
         fullWidth
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      />
+      /><hr></hr>
+      <label>* Please write at least three title tags f.e.(html, css, js)</label>
       <TextField
         value={tags}
         onChange={(e) => setTags(e.target.value)}
-        classes={{ root: styles.tags }} variant="standard" placeholder="Тэги" fullWidth />
+        classes={{ root: styles.tags }}
+        variant="standard"
+        placeholder="Tags..."
+        fullWidth />
+
       <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button onClick={onsubmit} size="large" variant="contained">
-          {isEditing ? 'Сохранить' : 'Опубликовать'}
+          {isEditing ? 'Save' : 'Publish'}
         </Button>
         <Link to="/">
-          <Button size="large">Отмена</Button>
+          <Button size="large">Cancel</Button>
         </Link>
       </div>
     </Paper>
   );
 };
+
+
+
+
+

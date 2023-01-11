@@ -87,7 +87,7 @@ export const AddPost = () => {
         alert('Error getting article!');
       });
     }
-  }, []);
+  }, [id]);
 
   const options = React.useMemo(
     () => ({

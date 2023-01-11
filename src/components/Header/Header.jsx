@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { logout, selectIsAuth } from '../../redux/slices/auth';
 
-import styles from './header.module.scss';
+import styles from "./header.module.scss";
 
 export const Header = () => {
   const dispatch = useDispatch();

@@ -24,7 +24,7 @@ export const FullPost = () => {
       console.warn(err);
       alert('Error getting article!');
     });
-  }, []);
+  }, [id]);
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />

@@ -52,7 +52,9 @@ export const AddPost = () => {
 
   const onsubmit = async () => {
     try {
-      setLoading(true);
+      if (isLoading) {
+        setLoading(true);
+      }
 
       const fields = {
         title,

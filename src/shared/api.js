@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
     // baseURL: 'http://localhost:8888'
-    baseURL: process.env.REACT_APP_API_URL
+    baseURL: 'https://blog-posts-backend.onrender.com'
 });
 
 export const getPosts = async () => {

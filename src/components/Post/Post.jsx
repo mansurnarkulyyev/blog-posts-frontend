@@ -38,7 +38,7 @@ export const Post = ({
     return <PostSkeleton />;
   }
 
-  const onClickRemove = () => {
+  const onClickRemove = (id) => {
     if (window.confirm('Do you really want to delete the article?')) {
       dispatch(fetchRemovePost(id));
     }
@@ -57,7 +57,7 @@ export const Post = ({
               <EditIcon />
             </IconButton>
           </Link>
-          <IconButton onClick={onClickRemove} color="secondary">
+          <IconButton onClick={() => onClickRemove(id)} color="secondary">
             <DeleteIcon />
           </IconButton>
         </div>
